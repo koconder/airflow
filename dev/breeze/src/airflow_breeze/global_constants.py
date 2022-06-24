@@ -60,9 +60,10 @@ ALLOWED_CONSTRAINTS_MODES_PROD = ['constraints', 'constraints-no-providers', 'co
 
 MOUNT_SELECTED = "selected"
 MOUNT_ALL = "all"
-MOUNT_NONE = "none"
+MOUNT_SKIP = "skip"
+MOUNT_REMOVE = "remove"
 
-ALLOWED_MOUNT_OPTIONS = [MOUNT_SELECTED, MOUNT_ALL, MOUNT_NONE]
+ALLOWED_MOUNT_OPTIONS = [MOUNT_SELECTED, MOUNT_ALL, MOUNT_SKIP, MOUNT_REMOVE]
 ALLOWED_POSTGRES_VERSIONS = ['10', '11', '12', '13', '14']
 ALLOWED_MYSQL_VERSIONS = ['5.7', '8']
 ALLOWED_MSSQL_VERSIONS = ['2017-latest', '2019-latest']
@@ -87,7 +88,8 @@ ALLOWED_INSTALLATION_METHODS = ['.', 'apache-airflow']
 ALLOWED_DEBIAN_VERSIONS = ['bullseye', 'buster']
 ALLOWED_BUILD_CACHE = ["registry", "local", "disabled"]
 MULTI_PLATFORM = "linux/amd64,linux/arm64"
-ALLOWED_PLATFORMS = ["linux/amd64", "linux/arm64", MULTI_PLATFORM]
+SINGLE_PLATFORMS = ["linux/amd64", "linux/arm64"]
+ALLOWED_PLATFORMS = [*SINGLE_PLATFORMS, MULTI_PLATFORM]
 ALLOWED_USE_AIRFLOW_VERSIONS = ['none', 'wheel', 'sdist']
 
 PARAM_NAME_DESCRIPTION = {
@@ -100,18 +102,6 @@ PARAM_NAME_DESCRIPTION = {
     "EXECUTOR": "Executors",
     "POSTGRES_VERSION": "Postgres version",
     "MSSQL_VERSION": "MSSql version",
-}
-
-PARAM_NAME_FLAG = {
-    "BACKEND": "--backend",
-    "MYSQL_VERSION": "--mysql-version",
-    "KUBERNETES_MODE": "--kubernetes-mode",
-    "KUBERNETES_VERSION": "--kubernetes-version",
-    "KIND_VERSION": "--kind-version",
-    "HELM_VERSION": "--helm-version",
-    "EXECUTOR": "--executor",
-    "POSTGRES_VERSION": "--postgres-version",
-    "MSSQL_VERSION": "--mssql-version",
 }
 
 EXCLUDE_DOCS_PACKAGE_FOLDER = [
@@ -165,9 +155,6 @@ CURRENT_PYTHON_MAJOR_MINOR_VERSIONS = ['3.7', '3.8', '3.9', '3.10']
 CURRENT_POSTGRES_VERSIONS = ['10', '11', '12', '13', '14']
 CURRENT_MYSQL_VERSIONS = ['5.7', '8']
 CURRENT_MSSQL_VERSIONS = ['2017-latest', '2019-latest']
-POSTGRES_VERSION = CURRENT_POSTGRES_VERSIONS[0]
-MYSQL_VERSION = CURRENT_MYSQL_VERSIONS[0]
-MSSQL_VERSION = CURRENT_MSSQL_VERSIONS[0]
 DB_RESET = False
 START_AIRFLOW = "false"
 LOAD_EXAMPLES = False
